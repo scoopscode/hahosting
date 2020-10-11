@@ -6,7 +6,7 @@ const prefix = "h/"
 
 altitude.once('ready', () => {
     console.log("If your reading this, the deploy was successful")
-    altitude.user.setActivity("Made by Scoopy!", {
+    altitude.user.setActivity("Made by Scoopy! | h/", {
         type: "PLAYING",
     })
 })
@@ -18,9 +18,9 @@ altitude.on('message', message => {
  
     const command = args.shift().toLowerCase();
  
-    if(command === 'test'){
-        message.channel.send("*Scoopy Developer Mode | Build master* `68efab25`")
-    } else if (command === 'croissant'){
+    if(command === '?'){
+        message.channel.send("*Made possible by Scoopy, made with ❤️ | Build master* `68efab25`")
+    } else if (command === ''){
     }
 })
 
