@@ -46,7 +46,7 @@ altitude.on('message', message => {
             if (!user) {
                 return message.channel.send('*Please @ at the end who you are wishing to hug*')
             }
-            return message.channel.send(`${message.author.username} + ' *hugged* ' + ${user.username}❤️❤️❤️`)
+            return message.channel.send(`${message.author.username} + ' *hugged* ' + ${user4.username}❤️❤️❤️`)
             break;
         case 'slap':
             let user2 = message.mentions.users.first();
