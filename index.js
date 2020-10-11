@@ -28,24 +28,43 @@ altitude.on('message', message => {
 //Music (WIP)
 
 //Leveling
-altitude.on('message', async message => {
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
+altitude.on("message", async message => {
+    if(message.author.bot || message.channel.type === "dm") return;
 
-    let messageArray = messsage.content.split(" ")
+
+    //args system that is very required!!!!
+    let messageArray = message.content.split(" ")
     let args = messageArray.slice(1);
-    if(message.content.toLowerCase() === "ban") {
+
+    let command = messageArray[0];
+
+    if(command === "h/ban") {
         let toBan = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(x => x.user.username.toLowerCase() === args.slice(0).join(" ") || x.user.username === args[0]);
 
-        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(`Uh oh, looks like you need permissions to use this command!`)
-        if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send(`Uh oh, looks like I'm missing permissions to do this command!`)
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("__**Uh oh! You don't have permissions to use this command!**__") 
+        if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("__**Uh oh! Looks like I don't have permissions to do this command!**__") 
 
-        const reason = args[1] || "No reason provided";
+        const reason = args[1] || "There was no reason!";
 
         toBan.ban({
             reason: reason
         })
-        message.channel.send(`${toBan} has been banned from ${message.guild.name}!\nReason: ${reason}`)
+        message.channel.send(`${toBan} has been banned from the server!\nReason: ${reason}`)
     }
+
+    if(cmd === "h/unban") {
+        let toBan = await bot.users.fetch(args[0])
+
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("__**Uh oh! You don't have permissions to use this command!**__") 
+        if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("__**Uh oh! Looks like I don't have permissions to do this command!**__") 
+
+        const reason = args[1] || "There was no reason!";
+
+        message.guild.members.unban(toBan, reason)
+
+        message.channel.send(`${toBan} has been unbanned from the server!`)
+    }
+
 })
 
 altitude.login(process.env.token)
