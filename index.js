@@ -42,7 +42,7 @@ altitude.on('message', message => {
             return message.channel.send(message.author.username + ' killed ' + user.username)
             break;
         case 'hug':
-            let user = message.mentions.users.first();
+            let user4 = message.mentions.users.first();
             if (!user) {
                 return message.channel.send('*Please @ at the end who you are wishing to hug*')
             }
